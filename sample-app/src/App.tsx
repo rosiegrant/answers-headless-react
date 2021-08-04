@@ -1,26 +1,11 @@
 import VerticalResultsDisplay from './components/VerticalResultsDisplay';
-import VerticalSearchForm from './components/VerticalSearchForm';
+import SearchBar from './components/SearchBar';
 
 import './App.css';
 import { AnswersActionsProvider } from '@yext/answers-headless-react';
-import StaticFilters from './components/StaticFilters';
 import ResultsCount from './components/ResultsCount';
 
 function App() {
-  const staticFilterOptions = [
-    {
-      field: 'c_employeeDepartment',
-      value: 'Technology'
-    },
-    {
-      field: 'c_employeeDepartment',
-      value: 'Consulting',
-    },
-    {
-      field: 'c_employeeDepartment',
-      value: 'Finance',
-    }
-  ]
   return (
     <AnswersActionsProvider
       apiKey='2d8c550071a64ea23e263118a2b0680b'
@@ -29,13 +14,9 @@ function App() {
     >
       <div className='left'>
         test
-        <StaticFilters
-          title='~Employee Departments~'
-          options={staticFilterOptions}
-        />
       </div>
       <div className='right'>
-        <VerticalSearchForm verticalKey='people' />
+        <SearchBar verticalKey='people' name='main-searchbar'/>
         <ResultsCount />
         <VerticalResultsDisplay
           randomString='this is my arbitrary string!'
