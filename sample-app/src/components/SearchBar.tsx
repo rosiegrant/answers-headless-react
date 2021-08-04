@@ -1,13 +1,15 @@
-import { useRef, KeyboardEvent } from 'react';
+import { useRef, KeyboardEvent, useState } from 'react';
 import { useAnswersActions } from '@yext/answers-headless-react';
 import '../sass/SearchBar.scss';
 import { useEffect } from 'react';
 import Autocomplete from './Autocomplete';
 import { ReactComponent as MagnifyingGlassIcon } from '../icons/magnifying_glass.svg';
+import { AutocompleteResponse, AutocompleteResult } from '@yext/answers-core';
 
-function SearchBar({ name, verticalKey }: { name: string, verticalKey: string }) {
+function SearchBar({ verticalKey }: { name: string, verticalKey: string }) {
   const answersActions = useAnswersActions();
   useEffect(() => answersActions.setVerticalKey(verticalKey))
+  const [autocompleteResults, setAutocompleteResults] = useState<AutocompleteResult[]>([]);
   const inputRef = useRef<HTMLInputElement>(document.createElement('input'));
 
   const executeSearch = () => {
@@ -21,7 +23,12 @@ function SearchBar({ name, verticalKey }: { name: string, verticalKey: string })
   }
   const handleChange = () => {
     answersActions.setQuery(inputRef.current.value || '');
-    answersActions.executeVerticalAutoComplete(name);
+    answersActions.executeVerticalAutoComplete().then(autocompleteResponse => {
+      if (!autocompleteResponse) {
+        return;
+      }
+      setAutocompleteResults(autocompleteResponse.results)
+    });
   }
   return (
     <div className='SearchBar'>
@@ -36,10 +43,7 @@ function SearchBar({ name, verticalKey }: { name: string, verticalKey: string })
           <MagnifyingGlassIcon/>
         </button>
       </div>
-      <Autocomplete
-        autocompleteId='main-searchbar'
-        inputRef={inputRef}
-      />
+      <Autocomplete inputRef={inputRef} autocompleteResults={autocompleteResults}/>
     </div>
   )
 }

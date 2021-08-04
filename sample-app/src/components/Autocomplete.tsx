@@ -1,5 +1,5 @@
 import { AutocompleteResult } from '@yext/answers-core';
-import { subscribeToStateUpdates, useAnswersActions } from '@yext/answers-headless-react';
+import { useAnswersActions } from '@yext/answers-headless-react';
 import { MutableRefObject, useEffect, useState } from 'react';
 import '../sass/Autocomplete.scss';
 
@@ -8,7 +8,7 @@ interface Props {
   inputRef: MutableRefObject<HTMLInputElement>
 }
 
-function Autocomplete({ autocompleteResults, inputRef }: Props) {
+export default function Autocomplete({ autocompleteResults, inputRef }: Props) {
   const [selectedIndex, updateSelected] = useState<number>(-1);
   const [shouldDisplay, toggleDisplay] = useState<boolean>(true);
   const answersActions = useAnswersActions();
@@ -102,9 +102,3 @@ const renderWithHighlighting = ({ value, matchedSubstrings }: AutocompleteResult
   }
   return highlightedJSX;
 }
-
-export default subscribeToStateUpdates((state, { autocompleteId }) => {
-  return {
-    autocompleteResults: state.vertical.autoCompleteMap[autocompleteId]?.results || []
-  }
-})(Autocomplete)
