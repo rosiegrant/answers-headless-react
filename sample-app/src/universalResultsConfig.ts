@@ -1,4 +1,5 @@
 import { StandardCard } from './components/cards/StandardCard';
+import { FaqCard } from './components/cards/FaqCard';
 import { VerticalConfig } from './components/UniversalResults';
 
 export type UniversalResultsConfig = Record<string, VerticalConfig>;
@@ -9,6 +10,14 @@ export const universalResultsConfig: UniversalResultsConfig = {
     viewAllButton: true,
     cardConfig: {
       CardComponent: StandardCard,
+      showOrdinal: false
+    }
+  },
+  faqs: {
+    label: 'FAQ',
+    viewAllButton: true,
+    cardConfig: {
+      CardComponent: FaqCard,
       showOrdinal: false
     }
   },

@@ -4,6 +4,7 @@ import { useLayoutEffect } from 'react';
 import { useAnswersActions } from '@yext/answers-headless-react';
 import { SearchIntent } from '@yext/answers-headless-react';
 import { UniversalResultsConfig } from '../universalResultsConfig';
+import LocationBias from '../components/LocationBias';
 import {
   executeSearch,
   getSearchIntents,
@@ -40,6 +41,9 @@ export default function UniversalSearchPage(props: { universalResultsConfig: Uni
       <UniversalResults
         appliedFiltersConfig={universalResultsFilterConfig}
         verticalConfigs={universalResultsConfig}
+      />
+      <LocationBias 
+        isVertical={false}
       />
     </div>
   );

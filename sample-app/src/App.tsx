@@ -23,10 +23,9 @@ const routes = [
 export default function App() {
   return (
     <AnswersHeadlessProvider
-      apiKey='2d8c550071a64ea23e263118a2b0680b'
-      experienceKey='slanswers'
+      apiKey='3517add824e992916861b76e456724d9'
+      experienceKey='answers-js-docs'
       locale='en'
-      verticalKey='people'
       sessionTrackingEnabled={true}
     >
       <div className='App mx-8 mt-4'>

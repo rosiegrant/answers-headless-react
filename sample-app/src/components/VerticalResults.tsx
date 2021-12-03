@@ -38,6 +38,7 @@ export function VerticalResultsDisplay(props: VerticalResultsDisplayProps): JSX.
     ? classNames({ [cssClasses.results___loading]: isLoading })
     : '';
 
+  console.log(results);
   return (
     <div className={resultsClassNames}>
       {results && results.map(result => renderResult(CardComponent, cardConfig, result))}
